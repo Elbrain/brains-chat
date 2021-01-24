@@ -4,34 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleAuthService implements AuthService {
-    private class UserData {
-        private String login;
-        private String password;
-        private String nickname;
 
-        public UserData(String login, String password, String nickname) {
-            this.login = login;
-            this.password = password;
-            this.nickname = nickname;
-        }
-    }
-
-    private List<UserData> users;
-
-    public SimpleAuthService() {
-        this.users = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
-            users.add(new UserData("login" + i, "pass" + i, "nick" + i));
-        }
-    }
+    private final DBconnection dBconnection = DBconnection.getInstance();
 
     @Override
     public String getNicknameByLoginAndPassword(String login, String password) {
-        for (UserData o : users) {
-            if (o.login.equals(login) && o.password.equals(password)) {
-                return o.nickname;
-            }
-        }
-        return null;
+        return dBconnection.findByLoginAndPass(login, password);
+    }
+
+    @Override
+    public boolean updateNickname(String oldNickname, String newNickname){
+        int result = dBconnection.updateNickname(oldNickname, newNickname);
+        return result != 0;
     }
 }
