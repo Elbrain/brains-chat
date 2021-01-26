@@ -39,6 +39,7 @@ public class Network {
         Network.callOnCloseConnection = callOnCloseConnection;
     }
 
+
     public static void sendAuth(String login, String password) {
         try {
             if (socket == null || socket.isClosed()) {
@@ -55,6 +56,7 @@ public class Network {
             socket = new Socket("localhost", 8189);
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
+
             Thread clientListenerThread = new Thread(() -> {
                 try {
                     while (true) {
@@ -70,6 +72,8 @@ public class Network {
                             break;
                         }
                         callOnMsgReceived.callback(msg);
+                        FileLog fileLog = new FileLog();
+                        fileLog.writeLogs(msg);
                     }
                 } catch (IOException e) {
                     callOnException.callback("Соединение с сервером разорвано");

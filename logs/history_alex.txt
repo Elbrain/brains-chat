@@ -1,0 +1,9 @@
+/clients pag
+pag: Checking history file
+/clients pag Zajac
+Zajac: me also checking history file 
+pag: it seems working
+Zajac: that is amazing
+Zajac: now i can check back history
+Zajac: of my chats
+от Zajac: check whisper

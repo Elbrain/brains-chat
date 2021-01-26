@@ -57,9 +57,11 @@ public class Controller implements Initializable {
 
     public void sendAuth() {
         Network.sendAuth(loginField.getText(), passField.getText());
+        FileLog.receiveLogin(loginField.getText()); //test
         loginField.clear();
         passField.clear();
     }
+
 
     public void sendMsg() {
         if (Network.sendMsg(msgField.getText())) {
