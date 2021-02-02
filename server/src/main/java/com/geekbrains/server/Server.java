@@ -20,6 +20,7 @@ public class Server {
         clients = new Vector<>();
         authService = new SimpleAuthService();
         executorService = Executors.newCachedThreadPool();
+
         try (ServerSocket serverSocket = new ServerSocket(8189)) {
             System.out.println("Сервер запущен на порту 8189");
             while (true) {
@@ -29,8 +30,7 @@ public class Server {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             executorService.shutdown();
         }
         System.out.println("Сервер завершил свою работу");
